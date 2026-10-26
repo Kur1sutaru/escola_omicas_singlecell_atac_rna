@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "Se você usar este material, por favor cite-o como abaixo."
+title: "Análise Avançada de Dados de Single-cell RNA-seq, ATAC-seq e Multiome (10x Genomics) no Google Colab"
+type: software
+authors:
+  - family-names: "Villalba Silva"
+    given-names: "Gerda Cristal"
+    orcid: "https://orcid.org/0000-0003-0283-7982"
+date-released: 2026-10-26
+version: "1.0.0"
+license: MIT
+repository-code: "https://github.com/kur1sutaru/curso-singlecell-multiome-avancado"
+keywords: [single-cell, scRNA-seq, scATAC-seq, multiome, 10x Genomics, scverse, Google Colab, GRN]

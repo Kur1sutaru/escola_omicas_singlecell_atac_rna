@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+tests/_work/
+data/*
+!data/README.md
+!data/exemplo_GSE293526/
+resultados/
+.snakemake/
+*.h5mu
+*.h5ad
+!data/exemplo_GSE293526/*
+synth_motifs.meme
