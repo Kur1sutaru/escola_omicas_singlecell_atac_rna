@@ -1,0 +1,8 @@
+amostra: pbmc3k
+resolucoes: [0.5, 1.0]
+qc:
+  min_genes: 200
+  max_pct_mt: 15
+n_hvg: 2000
+seed: 0
+entrada_local: ""     # caminho para um .h5ad local; vazio = baixar pbmc3k

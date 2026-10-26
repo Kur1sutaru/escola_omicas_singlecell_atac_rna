@@ -1,0 +1,44 @@
+configfile: "config.yaml"
+
+A = config["amostra"]
+RES = config["resolucoes"]
+
+rule all:
+    input:
+        f"resultados/{A}/relatorio.csv"
+
+rule baixar:
+    output: f"dados/{A}_bruto.h5ad"
+    params: entrada=config["entrada_local"]
+    script: "scripts/baixar.py"
+
+rule qc:
+    input: rules.baixar.output
+    output: "resultados/{amostra}/qc.h5ad"
+    params: min_genes=config["qc"]["min_genes"], max_pct_mt=config["qc"]["max_pct_mt"]
+    log: "logs/{amostra}_qc.log"
+    script: "scripts/qc.py"
+
+rule normalizar:
+    input: "resultados/{amostra}/qc.h5ad"
+    output: "resultados/{amostra}/norm.h5ad"
+    params: n_hvg=config["n_hvg"], seed=config["seed"]
+    script: "scripts/normalizar.py"
+
+rule cluster:
+    input: "resultados/{amostra}/norm.h5ad"
+    output: "resultados/{amostra}/cluster_res{res}.csv"
+    params: seed=config["seed"]
+    script: "scripts/cluster.py"
+
+rule marcadores:
+    input: norm="resultados/{amostra}/norm.h5ad", cl="resultados/{amostra}/cluster_res{res}.csv"
+    output: "resultados/{amostra}/marcadores_res{res}.csv"
+    script: "scripts/marcadores.py"
+
+rule relatorio:
+    input:
+        cl=expand("resultados/{{amostra}}/cluster_res{res}.csv", res=RES),
+        mk=expand("resultados/{{amostra}}/marcadores_res{res}.csv", res=RES)
+    output: "resultados/{amostra}/relatorio.csv"
+    script: "scripts/relatorio.py"
