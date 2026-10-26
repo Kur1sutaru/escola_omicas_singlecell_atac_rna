@@ -1,0 +1,11 @@
+# Para rodar fora do Colab (servidor / notebook local)
+# conda env create -f environment/environment.yml && conda activate sc-avancado
+name: sc-avancado
+channels: [conda-forge, bioconda]
+dependencies:
+  - python=3.12
+  - pip
+  - graphviz
+  - openjdk=17          # Nextflow (opcional)
+  - pip:
+      - -r requirements-colab.txt
